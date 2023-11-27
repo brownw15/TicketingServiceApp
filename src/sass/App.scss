@@ -1,0 +1,591 @@
+//Imports
+@import "meyer", "variables", "defaults";
+
+/* Navigation bar styles */
+.navbar {
+    color: white;
+    background-color: $c_dark;
+    height: 80px;
+    padding: 0 60px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+        width: 168px;
+    }
+
+    .navbar-items {
+        a {
+            color: $c_white;
+            @include f_strong;
+            text-decoration: none;
+            margin-left: 30px;
+
+            &:hover {
+                color: $c_red;
+            }
+
+            &.activeLink {
+                color: $c-red;
+
+                &.log-in {
+                    color: $c-white;
+                }
+            }
+        }
+    }
+}
+
+#videoClose {
+    pointer-events: none;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    min-width: 1024px;
+    height: 100vh;
+    background-color: rgba($c_dark, 0.75);
+
+    @include prefix(transition, opacity 0.2s ease-out, webkit);
+
+    &.visible {
+        pointer-events: all;
+        opacity: 100%;
+    }
+
+    p {
+        color: $c_white;
+        position: absolute;
+        bottom: 1rem;
+    }
+}
+
+#videoPopup {
+    pointer-events: none;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    min-width: 1024px;
+    height: 100vh;
+
+    @include prefix(transition, opacity 0.2s ease-out, webkit);
+
+    video {
+        pointer-events: none;
+        width: 100%;
+        max-width: 840px;
+        background-color: $c-dark;
+        border-radius: 2px;
+        z-index: 1000;
+    }
+
+    &.visible {
+        pointer-events: none;
+        opacity: 100%;
+
+        video {
+            pointer-events: all;
+        }
+    }
+}
+
+
+
+/* Styles for the login page */
+.login {
+    background-image: url("images/login_bg.jpg");
+    background-position: center;
+    background-size: cover;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__form {
+        position: relative;
+        bottom: 40px;
+        text-align: center;
+        width: 362px;
+        background-color: $c_white;
+        padding: 16px;
+        border-radius: 3px;
+
+        .logo {
+            margin: 24px 0;
+
+            img {
+                width: 176px;
+            }
+        }
+
+        form {
+            margin-top: 30px;
+            input {
+                width: 100%;
+            }
+
+            .tac {
+                margin-top: 16px;
+
+                display: flex;
+                justify-content: center;
+                align-items: baseline;
+                margin-bottom: 8px;
+
+                input[type="checkbox"] {
+                    width: 13px;
+                    margin-right: 12px;
+                }
+
+                label {
+                    display: inline-block;
+                    font-size: .75rem;
+                }
+            }
+
+            input[type="submit"] {
+                margin: 12px 0;
+                width: auto;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/* Styles for user-facing pages */
+.userPage {
+    /* The searchbar at the top of each page */
+    .search {
+        background: url("images/search_bg.jpg");
+        background-position: center;
+        background-size: cover;
+        height: 462px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        &::after {
+            width: 100;
+            height: 100;
+            background-color: rgba($c_red, 0.75);
+        }
+
+        form {
+            width: (1280px / 1440px) * 100%;
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 10px;
+
+            input[type="search"] {
+                max-width: (738px / 1440px) * 100%;
+                width: 100%;
+                padding: 12px;
+                border: none;
+                border-radius: 2px;
+                font-size: 1rem;
+            }
+
+            input[type="submit"] {
+                background-color: $c_dark;
+                @include prefix(transition, background-color 0.1s ease-out, webkit);
+                &:hover {
+                    background-color: $c_dark_hover;
+                }
+            }
+        }
+    }
+
+    /*  Under the searchbar is the rest of the content */
+    .pageContent {
+        padding-top: 48px;
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-gap: 20px;
+
+        section {
+            grid-column: 1 / -1;
+
+            &>h3 {
+                grid-column: 1 / -1;
+                text-align: center;
+                margin-bottom: 24px;
+            }
+        }
+
+        .goback {
+            grid-column: 3 / 11;
+        }
+
+        /* Landing page -- category */
+        section.category {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+            margin-bottom: 48px;
+
+            a {
+                color: $c-dark;
+                text-decoration: none;
+
+                &:hover {
+                    color: $c-dark;
+                }
+            }
+
+            .card--category {
+                @extend .card;
+                text-align: center;
+
+                h3 {
+                    text-decoration: none;
+                }
+                img {
+                    margin-top: 16px;
+                    //padding: 12px;
+                    width: 100%;
+                }
+            }
+        }
+
+        /* Landing page -- popular articles */
+        section.popular .popularCardsFix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+
+            p {
+                grid-column: 1 / -1;
+            }
+
+            .card--popular {
+                @extend .card;
+
+                h3 {
+                    font-size: 1rem;
+                    display: -webkit-box;
+                    @include prefix(box-orient, vertical, webkit moz);
+                    @include prefix(line-clamp, 1, webkit moz);
+                    overflow: hidden;
+                    margin-bottom: 16px;
+                }
+
+                p {
+                    display: -webkit-box;
+                    @include prefix(box-orient, vertical, webkit moz);
+                    @include prefix(line-clamp, 3, webkit moz);
+                    overflow: hidden;
+                    margin-bottom: 16px;
+                    height: 4.875rem;
+                }
+
+                a {
+                    @include f_strong;
+                }
+            }
+        }
+
+        /* All pages -- get help section */
+        section.help {
+            text-align: center;
+            margin-bottom: 72px;
+            margin-top: 48px;
+            p {
+                @include f_strong;
+                padding: 12px;
+            }
+        }
+
+        /* Articles for the article pages */
+        article {
+            grid-column: 3 / 11;
+
+            section {
+                margin-top: 3rem;
+
+                h1, h2, h3, h4, h5, h6 {
+                    text-align: left;
+                }
+            }
+        }
+    /* END OF PAGECONTENT */
+    }
+}
+
+/* Styles for the dashboard pages */
+@import "dashboard";
+
+
+/* Submission form */
+#ticketForm {
+    max-width: 846px;
+    margin: 0 auto;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: 20px;
+
+    /*.formHeader {
+        grid-column: 1 / -1;
+
+        .text {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            width: 100%;
+
+            img {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    } */
+
+    h3, h4, p{
+        margin-bottom: 16px;
+        grid-column: 1 / -1;
+    }
+
+    h4 {
+        margin-top: 24px;
+    }
+
+    .field {
+        grid-column: 1 / -1;
+
+        input, select, textarea {
+            width: 100%;
+        }
+    }
+
+    #firstName {
+        grid-column: 1 / 5;
+    }
+
+    #lastName {
+        grid-column: 5 / -1;
+    }
+
+    #email, {
+        grid-column: 1 / 7;
+    }
+
+    #location {
+        grid-column: 1 / -1;
+    }
+
+    #phoneNumber {
+        grid-column: 7 / -1;
+    }
+
+    #formControls {
+        margin-top: 24px;
+        text-align: center;
+
+        a {
+            margin-top: 24px;
+            display: inline-block;
+        }
+    }
+}
+
+#editTicket{
+    max-width: 846px;
+    margin: 0 auto;
+    padding-top: 48px;
+    padding-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: 20px;
+
+    h3, div {
+        grid-column: 1 / -1;
+
+        a {
+            padding-left: 24px;
+            @include f_regular;
+        }
+    }
+
+    div {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-column-gap: 20px;
+    }
+
+    input, select, textarea, label, #delete{
+        grid-column: 1 / -1;
+        width: 100%;
+    }
+
+    textarea {
+        margin-bottom: 16px;
+    }
+
+    label {
+        margin: 8px 0;
+    }
+}
+
+#delete {
+    max-width: 846px;
+    margin: 0 auto;
+    padding-bottom: 48px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: 20px;
+
+    input {
+        grid-column: 1 / -1;
+        width: 100%;
+    }
+}
+
+/* Footer styles */
+footer {
+    padding: 24px 60px;
+    background-color: $c_dark;
+    color: $c_white;
+
+    p {
+        margin: 12px 0;
+
+        &:first-of-type {
+            margin-top: 0;
+            @include f_strong;
+        }
+
+        &:last-of-type {
+            margin-bottom: 0;
+            font-size: .75rem;
+        }
+    }
+
+    a {
+        color: $c_white;
+    }
+}
+
+.notfound {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        font-size: 5rem;
+        position: relative;
+
+        animation: shake .5s ease-in-out;
+    }
+
+    @keyframes shake {
+        0% {
+            left: 0;
+        }
+
+        20% {
+            left: 3px;
+        }
+
+        40% {
+            left: -3px;
+        }
+
+        60% {
+            left: 2px;
+        }
+
+        80% {
+            left: -2px;
+        }
+
+        100% {
+            left: 0px;
+        }
+    }
+}
+
+/* search result page style - edited directly into app.css - rp */
+.searchResults > p{
+  margin-bottom: 24px;
+}
+.searchResult{
+  background-color: #FFF;
+  padding: 24px;
+  border-radius: 2px;
+  -webkit-transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  margin-bottom: 20px;
+}
+.searchResult:hover{
+  transform: scale(1.02);
+}
+.searchResult h3 {
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 1;
+  -moz-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.searchResult p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 2;
+  -moz-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.searchResult p:last-child {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-line-clamp: 1;
+  -moz-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  margin-bottom: 0px;
+}
+.searchResult a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  padding:8px;
+}

@@ -1,0 +1,148 @@
+// Styles for the dashboard pages
+.dashboardPage {
+    max-width: 1440px;
+    min-height: calc(100vh - 80px);
+    margin: 0 auto;
+
+    .container, .ticketTable {
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 48px;
+
+            h3 {
+                display: inline;
+
+                a {
+                    @include f_regular;
+
+                    &:nth-of-type(2) {
+                        margin-left: 30px;
+                    }
+
+                    &.active {
+                        color: $c_red;
+                    }
+                }
+            }
+
+            select {
+                width: 200px;
+            }
+        }
+    }
+
+    &.ticketDetail {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-column-gap: 20px;
+        align-items: start;
+
+        section {
+            margin: 48px 0;
+        }
+
+        .contact {
+            grid-column: 1 / 9;
+
+            h3 {
+                a {
+                    @include f_regular;
+                    margin-left: 30px;
+                }
+            }
+
+            #typearea {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                textarea {
+                    width: 100%;
+                    resize: vertical;
+                    min-height: 150px;
+                    margin: 12px 0;
+                }
+
+                button {
+                    margin-bottom: 24px;
+                }
+            }
+
+            .message {
+                padding: 12px 24px;
+                background-color: white;
+                border-left: 12px solid;
+                border-radius: 2px;
+                margin: 12px 0;
+
+                .bar {
+                    display: flex;
+                    justify-content: space-between;
+
+                    p {
+                        text-transform: capitalize;
+
+                        &:first-of-type {
+                            @include f_strong;
+                        }
+                    }
+                }
+
+                &--admin {
+                    @extend .message;
+                    border-color: $c_green;
+                }
+
+                &--user {
+                    @extend .message;
+                    border-color: $c-red;
+                }
+
+                &--system {
+                    @extend .message;
+                    border-color: $c_yellow;
+                    background-color: $c_lightyellow;
+                }
+            }
+        }
+
+        .details {
+            grid-column: 9 / -1;
+        }
+    }
+
+    .editor {
+        h3 {
+            padding-top: 48px;
+        }
+
+        p {
+            margin-bottom: 24px;
+        }
+
+        padding-bottom: 48px;
+        margin: 0 auto;
+        max-width: 1080px;
+
+        .megadraft {
+            background-color: $c_white;
+            border-radius: 2px;
+            margin-bottom: 24px;
+            text-align: left;
+            padding: 12px;
+        }
+
+        .editorRoot {
+            text-align: center;
+        }
+
+        .editorButtons {
+            display: flex;
+
+            button {
+                margin-right: 12px;
+            }
+        }
+    }
+}

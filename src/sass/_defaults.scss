@@ -1,0 +1,290 @@
+/* Defaults */
+//Default values for different elements
+
+* {
+    box-sizing: border-box;
+    &::selection {
+        background-color: $c_red;
+        color: $c-white;
+    }
+}
+
+html {
+    color: $c_dark;
+    font-size: 1rem;
+    @include f_regular;
+    background-color: $c_light;
+}
+
+.container {
+    min-height: calc(100vh - 80px);
+    min-width: 1024px;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.625;
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+li {
+    font-size: 1rem;
+    line-height: 1.625;
+    margin-bottom: 1rem;
+
+    &::marker {
+        font-weight: 600;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @include f_strong;
+    line-height: 1.625;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+strong {
+    @include f_strong;
+}
+
+em {
+    @include f_strong;
+    font-style: italic;
+}
+
+a {
+    cursor: pointer;
+    color: $c_dark;
+    @include prefix(transition, color 0.1s ease-out, webkit);
+
+    &:hover {
+        color: $c_red;
+    }
+}
+
+ol {
+    list-style: number;
+    margin: 1rem 0 1rem 2rem;
+}
+
+ul {
+    list-style: square;
+    margin: 1rem 0 1rem 2rem;
+}
+
+table {
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 48px;
+
+    tr {
+        background-color: $c-white;
+
+        &:nth-of-type(2n) {
+            background-color: $c-light;
+        }
+
+        td {
+            padding: 24px 4px;
+            vertical-align: middle;
+
+            &.edit {
+                text-align: center;
+                img {
+                    width: 30px;
+
+                }
+            }
+        }
+
+        th {
+            padding: 24px 4px;
+            @include f_strong;
+            text-align: left;
+            border-bottom: 2px solid $c_red;
+        }
+    }
+}
+
+input {
+    margin-bottom: 1rem;
+
+    &[type="submit"] {
+        margin-bottom: 0;
+    }
+}
+
+input[required] {
+    box-shadow: none;
+
+    &::placeholder {
+        color: $c_red_hover;
+    }
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"],
+input[type="text"],
+input[type="search"],
+input[type="tel"],
+input[type="date"],
+select {
+    color: $c_dark;
+    font-size: 1rem;
+    @include f_regular;
+    border: none;
+    border-bottom: 1px solid $c_dark;
+    padding: 8px 4px;
+
+    &:focus {
+        border-color: $c_red;
+    }
+
+    &:invalid {
+        color: $c-red;
+        box-shadow: none;
+    }
+
+    &::placeholder{
+        color: $c_dark_hover;
+    }
+}
+
+select {
+    margin-bottom: 16px;
+}
+
+textarea {
+    @include f_regular;
+    font-size: 1rem;
+    border: none;
+    padding: 8px 4px;
+    resize: vertical;
+    border-radius: 2px;
+}
+
+button, input[type="submit"] {
+    @include f_strong;
+    font-size: 1.125rem;
+    color: $c_white;
+    background-color: $c_red;
+    padding: 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+
+    @include prefix(transition, background-color 0.1s ease-out, webkit);
+
+    &:hover {
+        background-color: $c_red_hover;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            color: white;
+        }
+    }
+}
+
+.card {
+    background-color: $c_white;
+    padding: 24px;
+    border-radius: 2px;
+    @include scaleOnHover;
+    @include shadowOnHover;
+}
+
+span {
+    &.new, &.active {
+        color: $c-green;
+    }
+
+    &.resolved, &.complete {
+        color: $c-red;
+    }
+
+    &.onhold, &.cancelled {
+        color: $c-yellow;
+    }
+
+    &.blocked {
+        color: #888;
+    }
+}
+
+//Getting the megadraft editor to work.
+.megadraft-editor {
+    .DraftEditor-root {
+        .DraftEditor-editorContainer {
+            div.megadraft-block {
+                padding: 0;
+
+                h2 {
+                    @include f_strong;
+                    line-height: 1.625;
+                    margin-bottom: 1rem;
+                    font-size: 2rem;
+                }
+
+                p {
+                    @include f_regular;
+                    font-size: 1rem;
+                    line-height: 1.625;
+                    margin-bottom: 1rem;
+
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+
+                ul{
+                    list-style: square;
+                    margin: 1rem 0 1rem 2rem;
+
+                    li {
+                        @include f_regular;
+                    }
+                }
+
+                ol {
+                    list-style: number;
+                    margin: 1rem 0 1rem 2rem;
+
+                    li {
+                        @include f_regular;
+                    }
+                }
+
+                a {
+                    cursor: pointer;
+                    color: $c_dark;
+                    @include prefix(transition, color 0.1s ease-out, webkit);
+
+                    &:hover {
+                        color: $c_red;
+                    }
+                }
+            }
+        }
+    }
+}

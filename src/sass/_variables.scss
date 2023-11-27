@@ -1,0 +1,64 @@
+//imports
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+//fonts
+@mixin f_regular {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+
+@mixin f_strong {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+
+//colors
+$c_white: #FFF;
+$c_light: #ECECEC;
+$c_medium: #969696;
+$c_dark: #262626;
+$c_red: #B2292E;
+$c_green: #23BBBE;
+$c_yellow: #DEC74C;
+$c_lightyellow: #FFFCEB;
+
+$c_red_hover: #d93238;
+$c_dark_hover: #333333;
+
+//Mixins and misc
+@mixin prefix($prop, $value, $prefixes:()) {
+    @each $prefix in $prefixes {
+        #{"-" + $prefix + "-" + $prop}: $value;
+    }
+    #{$prop}: $value;
+}
+
+//This mixin scales up the element when it is hovered
+@mixin scaleOnHover {
+    @include prefix(transition, transform 0.3s ease-out, webkit);
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+//This mixin animates in a shadow when the object is hovered
+//This method is less resource-intensive
+@mixin shadowOnHover {
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 5px 20px rgba($c_dark, .15);
+        opacity: 0;
+        @include prefix(transition, opacity 0.3s ease-out, webkit);
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
+}
